@@ -1,0 +1,40 @@
+.alt-font {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 500 !important;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 13px;
+    color: #707070;
+    line-height: 22px;
+    letter-spacing: 0.01em;
+    background-color: #ffffff;
+}
+
+.btn-outline-secondary {
+    color: black;
+    border-color: black;
+  }
+  
+  .btn {
+    font-size: 13px;
+    padding: 10px 10px;
+  }
+
+.white-text {
+    color: white !important;
+}
+
+.black-text {
+    color: black !important;
+}
+
+.bold-text{
+    font-weight: bold;
+}
+
+
+
+
