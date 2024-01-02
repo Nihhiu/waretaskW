@@ -7,6 +7,8 @@ require_once __DIR__ . '/infra/middlewares/middleware-not-authenticated.php';
 <html lang="en">
 
 <head>
+    <?php include ('infra/db/connection.php'); ?>
+    <?php include('php/login.php'); ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,6 +35,17 @@ require_once __DIR__ . '/infra/middlewares/middleware-not-authenticated.php';
                     </div>
                 </div>
             </div>
+            <?php include('php/signup_form.php'); ?>
+            <?php include('php/login.php'); ?>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="btn btn-outline-secondary shadow-sm d-sm d-block nav-link" href="php/login.php">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-secondary shadow-sm d-sm d-block nav-link" href="php/signup.php">Sign up</a>
+            </li>
+        </ul>
 
             <footer class="p-3 bg-dark text-white mt-4">
                 <article>IPVC ESTG - Engenharia Informática &copy; - 2023-2024</article>
