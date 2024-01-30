@@ -6,7 +6,7 @@ require __DIR__ . '/infra/db/connection.php';
 $pdo->exec(
     'CREATE TABLE IF NOT EXISTS usuario (
         id INTEGER PRIMARY KEY AUTO_INCREMENT,  
-        username VARCHAR(50) NOT NULL,
+        username VARCHAR(50) UNIQUE NOT NULL,
         nome VARCHAR(50) NOT NULL,  
         email VARCHAR(128) UNIQUE NOT NULL,  
         senha VARCHAR(64) NOT NULL,

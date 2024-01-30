@@ -1,3 +1,4 @@
+<!-- Verifica os dados introduzidos e verifica se os mesmos são válidos -->
 <?php
 
 function isSignUpValid($req)
@@ -6,25 +7,41 @@ function isSignUpValid($req)
         $req[$key] =  trim($req[$key]);
     }
 
-    if (empty($req['name']) || strlen($req['name']) < 3 || strlen($req['name']) > 255) {
-        $errors['name'] = 'The name field cannot be empty and must be between 3 and 255 characters';
+    # Verificar o nome
+    if (empty($req['nome']) || strlen($req['nome']) < 3 || strlen($req['nome']) > 255) {
+        $errors['nome'] = 'Campo Nome inválido, necessita no minimo 3 caracteres.';
     }
 
-    if (!filter_var($req['email'], FILTER_VALIDATE_EMAIL)) {
-        $errors['email'] = 'The Email field must not be empty and must have an email format, such as: name@example.com.';
+    # Verificar o username
+    if (empty($req['username']) || strlen($req['username']) < 3 || strlen($req['username']) > 255 || strpos($req['username'], '@') !== false) {
+        $errors['username'] = 'Campo Username inválido, necessita no minimo 3 caracteres.';
     }
 
-    if (getByEmail($req['email'])) {
-        $errors['email'] = 'Email already registered in our system. If you cannot remember your password, please contact us.';
+    # Verificar se o username existe na db
+    if (getByUsername($req['username'])) {
+        $errors['username'] = 'Username já registado no sistema.';
         return ['invalid' => $errors];
     }
 
-    if (empty($req['password']) && strlen($req['password']) < 6) {
-        $errors['password'] = 'The Password field cannot be empty and must be at least 6 characters long.';
+    # Verificar o email
+    if (!filter_var($req['email'], FILTER_VALIDATE_EMAIL)) {
+        $errors['email'] = 'Campo Email inválido, necessita ser tipo:  exemplo@exemplo.com';
     }
 
-    if ($req['confirm_password'] != $req['password']) {
-        $errors['confirm_password'] = 'The Confirm Password field must not be empty and must be the same as the Password field.';
+    # Verificar se o email existe na db
+    if (getByEmail($req['email'])) {
+        $errors['email'] = 'Email já registado no sistema.';
+        return ['invalid' => $errors];
+    }
+
+    # Verificar a senha
+    if (!empty($req['senha']) && strlen($req['senha']) < 3) {
+        $errors['senha'] = 'Campo Senha inválido, necessita no minimo 3 caracteres.';
+    }
+
+    # Verificar se a confirmação condiz com a senha
+    if (!empty($req['confirmar_senha']) && ($req['confirmar_senha']) != $req['senha']) {
+        $errors['confirmar_senha'] = 'Campo Confirmar Senha não é igual ao campo Senha.';
     }
 
     if (isset($errors)) {
@@ -33,5 +50,3 @@ function isSignUpValid($req)
 
     return $req;
 }
-
-?>

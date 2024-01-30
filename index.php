@@ -25,7 +25,7 @@ require_once __DIR__ . '/setupdatabase.php';
     <!-- HEADER -->
     <nav class="navbar navbar-expand-lg">
         <div class="container container-color">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/waretaskW/index.php" >
                 <p style="font-weight: 700; font-size: 24px;"><img src="assets/images/Logo.png" alt="logo" width="100"
                         height="100" style="margin-left: 80px;"> WareTask</p>
             </a>
@@ -50,7 +50,7 @@ require_once __DIR__ . '/setupdatabase.php';
             </ul>
         </div>
     </nav>
-
+    <!-- Apresenta a página inicial -->
     <!-- CONTENT -->
 
     <div class="caribbean-current-container">
@@ -146,36 +146,6 @@ require_once __DIR__ . '/setupdatabase.php';
 
     <!-- FOOTER -->
 
-    <!-- FOOTER -->
-    <footer class="footer mt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h4>Contact Us</h4>
-                    <p>Email: info@waretask.com</p>
-                    <p>Phone: +123 456 7890</p>
-                </div>
-                <div class="col-md-4">
-                    <h4>Follow Us</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-secondary">Facebook</a></li>
-                        <li><a href="#" class="text-secondary">Twitter</a></li>
-                        <li><a href="#" class="text-secondary">LinkedIn</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h4>Quick Links</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="#" class="text-secondary">Terms of Service</a></li>
-                        <li><a href="#" class="text-secondary">Privacy Policy</a></li>
-                        <li><a href="#" class="text-secondary">FAQ</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-
-</body>
-
-</html>
+<?php
+include_once __DIR__ . '/templates/footer.php';
+?>

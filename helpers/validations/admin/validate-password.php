@@ -1,3 +1,4 @@
+<!-- O código checa a validade da password para ver se os parametros são atendidos -->
 <?php
 
 function passwordIsValid($req)
@@ -6,16 +7,16 @@ function passwordIsValid($req)
         $req[$key] = trim($req[$key]);
     }
 
-    if (empty($req['name']) || strlen($req['name']) < 3 || strlen($req['name']) > 255) {
-        $errors['name'] = 'The Name field cannot be empty and must be between 3 and 255 characters';
+    if (empty($req['nome']) || strlen($req['nome']) < 3 || strlen($req['nome']) > 255) {
+        $errors['nome'] = 'Campo Nome inválido, necessita no minimo 3 caracteres.';
     }
 
-    if (!empty($req['password']) && strlen($req['password']) < 6) {
-        $errors['password'] = 'The Password field cannot be empty and must be at least 6 characters long.';
+    if (!empty($req['senha']) && strlen($req['senha']) < 3) {
+        $errors['senha'] = 'Campo Senha inválido, necessita no minimo 3 caracteres.';
     }
 
-    if (!empty($req['confirm_password']) && ($req['confirm_password']) != $req['password']) {
-        $errors['confirm_password'] = 'The Confirm Password field must not be empty and must be the same as the Password field.';
+    if (!empty($req['confirmar_senha']) && ($req['confirmar_senha']) != $req['senha']) {
+        $errors['confirmar_senha'] = 'Campo Confirmar Senha não é igual ao campo Senha.';
     }
 
     if (isset($errors)) {
@@ -24,5 +25,3 @@ function passwordIsValid($req)
 
     return $req;
 }
-
-?>
