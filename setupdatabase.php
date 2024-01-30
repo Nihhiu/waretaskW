@@ -1,59 +1,75 @@
 <?php
-#EASY DATABASE SETUP
+# Conectar á DB
 require __DIR__ . '/infra/db/connection.php';
 
-#DROP TABLE
-$pdo->exec('DROP TABLE IF EXISTS users;');
-
-echo 'table users deleted!' . PHP_EOL;
-
-#CREATE TABLE
+# Criar Tabelas
 $pdo->exec(
-    'CREATE TABLE users (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT, 
-    name varchar(50)	, 
-    lastname varchar(50)	, 
-    phoneNumber varchar(50)	, 
-    email varchar(50)	 NOT NULL, 
-    foto varchar(50)	 NULL, 
-    administrator bit, 
-    password varchar(200)	);'
+    'CREATE TABLE IF NOT EXISTS usuario (
+        id INTEGER PRIMARY KEY AUTO_INCREMENT,  
+        username VARCHAR(50) NOT NULL,
+        nome VARCHAR(50) NOT NULL,  
+        email VARCHAR(128) UNIQUE NOT NULL,  
+        senha VARCHAR(64) NOT NULL,
+        administrador bit
+    );
+    CREATE TABLE IF NOT EXISTS tarefa (
+        idTarefa INTEGER AUTO_INCREMENT PRIMARY KEY,
+        titulo VARCHAR(100) NOT NULL,
+        descricao TEXT,
+        prioridade VARCHAR(10),
+        dataCriacao DATE,
+        prazoConclusao DATE,
+        estado VARCHAR(20),
+        favorito BOOLEAN,
+        tarefa TEXT,
+        idUsuarioCreador INTEGER NOT NULL,
+        FOREIGN KEY (idUsuarioCreador) REFERENCES usuario(id)
+    );
+    CREATE TABLE IF NOT EXISTS anexo (
+        idAnexos INTEGER AUTO_INCREMENT PRIMARY KEY,
+        idTarefa INTEGER,
+        tipoAnexo VARCHAR(20),
+        nomeAnexo VARCHAR(100),
+        caminhoAnexo VARCHAR(255),
+        FOREIGN KEY (idTarefa) REFERENCES tarefa(idTarefa)
+    );
+    CREATE TABLE IF NOT EXISTS UsuarioTarefaPartilhado (
+        usuarioPartilhado INTEGER,
+        idTarefa INTEGER,
+        PRIMARY KEY (usuarioPartilhado, idTarefa),
+        FOREIGN KEY (usuarioPartilhado) REFERENCES usuario(id),
+        FOREIGN KEY (idTarefa) REFERENCES tarefa(idTarefa)
+    );'
 );
 
-echo 'Tabela users created!' . PHP_EOL;
-
-#DEFAULT USER TO ADD
+# TEMP para adicionar user
+/*
+# Adicionar user padrão
 $user = [
-    'name' => 'Marcelo',
-    'lastname' => 'Antunes Fernandes',
-    'phoneNumber' => '987654321',
-    'email' => 'fernandesmarcelo@estg.ipvc.pt',
-    'foto' => null,
-    'administrator' => true,
-    'password' => '123456'
+    'nome' => 'Gabriel',
+    'username' => 'NihhiuOnTheBeat',
+    'email' => 'nihhiu@estg.ipvc.pt',
+    'administrador' => true,
+    'senha' => '123456'
 ];
 
-#HASH PWD
-$user['password'] = password_hash($user['password'], PASSWORD_DEFAULT);
+# Encriptar a password
+$user['senha'] = password_hash($user['senha'], PASSWORD_DEFAULT);
 
 #INSERT USER
 $sqlCreate = "INSERT INTO 
-    users (
-        name, 
-        lastname, 
-        phoneNumber, 
-        email, 
-        foto, 
-        administrator, 
-        password) 
+    usuario (
+        nome, 
+        username,
+        email,
+        administrador,
+        senha) 
     VALUES (
-        :name, 
-        :lastname, 
-        :phoneNumber, 
-        :email, 
-        :foto, 
-        :administrator, 
-        :password
+        :nome, 
+        :username, 
+        :email,
+        :administrador, 
+        :senha
     )";
 
 #PREPARE QUERY
@@ -61,13 +77,10 @@ $PDOStatement = $GLOBALS['pdo']->prepare($sqlCreate);
 
 #EXECUTE
 $success = $PDOStatement->execute([
-    ':name' => $user['name'],
-    ':lastname' => $user['lastname'],
-    ':phoneNumber' => $user['phoneNumber'],
+    ':nome' => $user['nome'],
+    ':username' => $user['username'],
     ':email' => $user['email'],
-    ':foto' => $user['foto'],
-    ':administrator' => $user['administrator'],
-    ':password' => $user['password']
+    ':administrador' => $user['administrador'],
+    ':senha' => $user['senha']
 ]);
-
-echo 'Default user created!';
+*/
