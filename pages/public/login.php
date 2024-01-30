@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../infra/middlewares/middleware-not-authenticated.php';
 include_once __DIR__ . '../../../templates/header.php';
 
-$title = ' - Sign In';
+$title = ' - Login';
 ?>
 <main>
   <section>

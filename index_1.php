@@ -1,3 +1,8 @@
+<?php
+require_once __DIR__ . '/infra/middlewares/middleware-not-authenticated.php';
+// require_once __DIR__ . './setupdatabase.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
