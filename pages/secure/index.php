@@ -4,47 +4,66 @@ require_once __DIR__ . '../../../infra/middlewares/middleware-user.php';
 include_once __DIR__ . '../../../templates/header.php';
 
 $user = usuario();
-$title = '- App';
 ?>
 
+<style>
+    .welcome-section {
+        background-color: #216869;
+        color: #ffffff;
+        padding: 20px;
+    }
+
+    .profile-card {
+        position: absolute;
+        bottom: 20px; /* Adjust the distance from the bottom */
+        left: 20px; /* Adjust the distance from the left */
+    }
+</style>
+
 <main>
-    <header class="pb-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center text-dark text-decoration-none"><img
-                src="/waretaskW/assets/images/logo-estg.svg" alt="ESTG" class="mw-100"></a>
-    </header>
-    <div class="p-5 mb-4 bg-body-tertiary rounded-3">
-        <div class="container-fluid py-5">
-            <h1 class="display-5 fw-bold">Hello
-                <?= $user['name'] ?? null ?>!
-            </h1>
-            <p class="col-md-8 fs-4">Ready for today?</p>
-            <div class="d-flex justify-content">
-                <form action="/waretaskW/controllers/auth/login_auth.php" method="post">
-                    <button class="btn btn-danger btn-lg px-4" type="submit" name="usuario" value="logout">Logout</button>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <img src="/waretaskW/assets/images/logo-estg.svg" alt="ESTG" class="img-fluid mb-4">
+            </div>
+            <div class="col-md-12 text-center welcome-section">
+                <?php if (isAuthenticated()): ?>
+                    <h1 class="display-4 fw-bold">Welcome, <?= $user['name'] ?? 'Guest' ?>!</h1>
+                <?php else: ?>
+                    <h1 class="h3">Welcome, Guest!</h1>
+                <?php endif; ?>
+                <p class="lead">Ready for today?</p>
+                <form action="/waretaskW/controllers/auth/login_auth.php" method="post" class="position-absolute top-0 end-0 mt-2 me-2">
+                    <button class="btn btn-danger btn-lg" type="submit" name="usuario" value="logout">Logout</button>
                 </form>
             </div>
         </div>
-    </div>
 
-    <div class="row align-items-md-stretch">
-        <div class="col-md-6">
-            <div class="h-100 p-5 text-bg-dark rounded-3">
-                <h2>Profile</h2>
-                <a href="/waretaskW/pages/secure/user/profile.php"><button class="btn btn-outline-light px-5"
-                        type="button">Change</button></a>
-            </div>
-        </div>
-
-        <?php
-        if (isAuthenticated() && $user['administrator']) {
-            echo '<div class="col-md-6">
-                    <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-                        <h2>Admin</h2>
-                        <a href="/waretaskW/pages/secure/admin/"><button class="btn btn-outline-success" type="button">Admin</button></a>
+        <div class="row mt-5">
+            <?php if (isAuthenticated()): ?>
+                <div class="col-md-6 offset-md-3 mt-3 profile-card">
+                    <div class="card h-100 bg-light">
+                        <div class="card-body text-center">
+                            <h2 class="card-title">Profile</h2>
+                            <a href="/waretaskW/pages/secure/user/profile.php" class="btn btn-outline-primary">Change</a>
+                        </div>
                     </div>
-                </div>';
-        }
-        ?>
+                </div>
+            <?php endif; ?>
+
+            <?php
+            if (isAuthenticated() && $user['administrator']) {
+                echo '<div class="col-md-6 offset-md-3 mt-3">
+                        <div class="card h-100 bg-light">
+                            <div class="card-body text-center">
+                                <h2 class="card-title">Admin</h2>
+                                <a href="/waretaskW/pages/secure/admin/" class="btn btn-outline-success">Admin</a>
+                            </div>
+                        </div>
+                    </div>';
+            }
+            ?>
+        </div>
     </div>
 </main>
 
