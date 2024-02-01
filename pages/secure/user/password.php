@@ -35,20 +35,20 @@ $user = usuario();
   <section>
     <form action="/waretaskW/controllers/admin/user.php" method="post" class="form-control py-3">
       <div class="input-group mb-3">
-        <span class="input-group-text">Name</span>
-        <input type="text" readonly class="form-control" name="name" placeholder="<?= $user['name'] ?>"
-          value="<?= $user['name'] ?>">
+        <span class="input-group-text">Nome</span>
+          <input type="text" readonly class="form-control" name="nome" placeholder="<?= isset($user['nome']) ? $user['nome'] : '' ?>"
+            value="<?= isset($user['nome']) ? $user['nome'] : '' ?>">
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text">Password</span>
-        <input type="password" class="form-control" name="password" maxlength="255" size="255" required>
+        <span class="input-group-text">Senha</span>
+        <input type="senha" class="form-control" name="senha" maxlength="255" size="255" required>
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text">Confirm Password</span>
-        <input type="password" class="form-control" name="confirm_password" maxlength="255" required>
+        <span class="input-group-text">Confirmar senha</span>
+        <input type="senha" class="form-control" name="senha" maxlength="255" required>
       </div>
       <div class="d-grid col-4 mx-auto">
-        <button class="w-100 btn btn-lg btn-success mb-2" type="submit" name="user" value="password">Change</button>
+        <button class="w-100 btn btn-lg btn-success mb-2" type="submit" name="nome" value="senha">Change</button>
       </div>
     </form>
   </section>

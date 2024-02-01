@@ -1,0 +1,17 @@
+.welcome-section {
+    background-color: #216869;
+    color: #ffffff;
+    padding: 20px;
+}
+
+.profile-card {
+    position: absolute;
+    bottom: 20px; /* Adjust the distance from the bottom */
+    left: 20px; /* Adjust the distance from the left */
+}
+
+.col-md-6 .bg-body-tertiary button {
+    color: black;
+    background-color: white;
+    border-color: black; /* You can adjust the border color if needed */
+}
