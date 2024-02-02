@@ -1,8 +1,6 @@
 <?php
 
 require_once __DIR__ . '/../../infra/repositories/usuarioRepository.php';
-require_once __DIR__ . '/../../infra/repositories/tarefaRepository.php';
-require_once __DIR__ . '/../../infra/repositories/partilhaRepository.php';
 require_once __DIR__ . '/../../helpers/validations/admin/validate-user.php';
 require_once __DIR__ . '/../../helpers/validations/admin/validate-password.php';
 require_once __DIR__ . '/../../helpers/session.php';
@@ -100,15 +98,15 @@ function updateProfile($req)
         $_SESSION['errors'] = $data['invalid'];
         $params = '?' . http_build_query($req);
         header('location: /waretaskW/pages/secure/user/profile.php' . $params);
-        } else {
+    } else {
         $usuario = usuario(); 
         $data['id'] = $usuario['id'];
-        $data['administrator'] = $usuario['administrator'];
+        $data['administrador'] = $usuario['administrador'];
 
         $success = updateUsuario($data);
 
         if ($success) {
-            $_SESSION['success'] = 'usuario successfully changed!';
+            $_SESSION['success'] = 'Perfil atualizado com sucesso!';
             $_SESSION['action'] = 'update';
             $params = '?' . http_build_query($data);
             header('location: /waretaskW/pages/secure/user/profile.php' . $params);

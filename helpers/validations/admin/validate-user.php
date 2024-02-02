@@ -6,6 +6,9 @@ function validarUsuario($req)
         $req[$key] =  trim($req[$key]);
     }
 
+    $tempUsername = getByUsername($req['username']);
+    $tempEmail = getByEmail($req['email']);
+
     if (empty($req['nome']) || strlen($req['nome']) < 3 || strlen($req['nome']) > 255) {
         $errors['nome'] = 'Campo Nome inválido, necessita no minimo 3 caracteres.';
     }
@@ -14,7 +17,7 @@ function validarUsuario($req)
         $errors['username'] = 'Campo Username inválido, necessita no minimo 3 caracteres.';
     }
 
-    if (getByEmail($req['username'])) {
+    if ($tempUsername['id'] != $_SESSION['id']) {
         $errors['username'] = 'Username já registado no sistema.';
         return ['invalid' => $errors];
     }
@@ -23,7 +26,7 @@ function validarUsuario($req)
         $errors['email'] = 'Campo Email inválido, necessita ser tipo:  exemplo@exemplo.com';
     }
 
-    if (getByEmail($req['email'])) {
+    if ($tempEmail['id'] != $_SESSION['id']) {
         $errors['email'] = 'Email já registado no sistema.';
         return ['invalid' => $errors];
     }

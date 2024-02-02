@@ -10,11 +10,15 @@ $user = usuario();
 <div class="p-5 mb-2 bg-dark text-white">
   <h1>User</h1>
 </div>
+
 <main>
   <section class="py-4">
     <div class="d-flex justify-content">
       <a href="/waretaskW/"><button type="button" class="btn btn-secondary px-5 me-2">Back</button></a>
       <a href="./password.php"><button class="btn btn-warning px-2 me-2">Change Password</button></a>
+      <form action="/waretaskW/controllers/auth/login_auth.php" method="post" class="position-absolute top-0 end-0 mt-2 me-2">
+        <button class="btn btn-danger btn-lg" type="submit" name="usuario" value="logout">Logout</button>
+      </form>
     </div>
   </section>
   <section>
@@ -51,7 +55,7 @@ $user = usuario();
       <div class="input-group mb-3">
         <span class="input-group-text">Senha</span>
           <input type="password" class="form-control" name="senha" maxlength="9"
-            value="<?= isset($_REQUEST['senha']) ? $_REQUEST['senha'] : (isset($user['senha']) ? $user['senha'] : '') ?>" required>
+            value="<?= isset($_REQUEST['senha']) ? $_REQUEST['senha'] : (isset($user['senha']) ? $user['senha'] : '') ?>" required readonly>
       </div>
       <div class="input-group mb-3">
         <span class="input-group-text">email</span>

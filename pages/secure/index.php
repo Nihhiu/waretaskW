@@ -11,21 +11,14 @@ $title = '- App';
 <link rel="stylesheet" href="index.css">
 </head>
 
-<body>
 <main>
 <div class="container mt-5">
     <div class="row">
-        <div class="col-md-12">
-            <img src="/waretaskW/assets/images/logo-estg.svg" alt="ESTG" class="img-fluid mb-4">
-        </div>
         <div class="col-md-12 text-center welcome-section"> 
             <h1 class="display-5 fw-bold">Olá
                 <?= $user['nome'] ?? null ?>!
             </h1>
             <p class="lead">Pronto para o dia?</p>
-            <form action="/waretaskW/controllers/auth/login_auth.php" method="post" class="position-absolute top-0 end-0 mt-2 me-2">
-                <button class="btn btn-danger btn-lg" type="submit" name="usuario" value="logout">Logout</button>
-            </form>
         </div>
     </div>
 
@@ -40,10 +33,9 @@ $title = '- App';
 
         <div class="col-md-6">
             <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-                <h2>Criar Tarefa</h2>
-                <a href="/waretaskW/pages/secure/tarefa/"><button class="btn btn-outline-info ms-2" type="button">Criar Tarefa</button></a>
+                <h2>Tarefa</h2>
                 <!-- Adiciona o botão "Visualizar Tarefas" -->
-                <a href="/waretaskW/pages/secure/tarefa/visualizar_tarefas.php"><button class="btn btn-outline-info ms-2" type="button">Visualizar Tarefas</button></a>
+                <a href="/waretaskW/pages/secure/tarefa/tarefa.php"><button class="btn btn-outline-info ms-2" type="button">Visualizar Tarefas</button></a>
             </div>
         </div>
 
