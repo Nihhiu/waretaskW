@@ -38,11 +38,12 @@ $title = '- App';
             </div>
         </div>
 
-    <div class="col-md-6">
-        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+        <div class="col-md-6">
+            <div class="h-100 p-5 bg-body-tertiary border rounded-3">
                 <h2>Criar Tarefa</h2>
-                <!-- Add the new button for "tarefa" -->
-                <a href="/waretaskW/pages/secure/tarefa/"><button class="btn btn-outline-info ms-2" type="button">Tarefa</button></a>
+                <a href="/waretaskW/pages/secure/tarefa/"><button class="btn btn-outline-info ms-2" type="button">Criar Tarefa</button></a>
+                <!-- Adiciona o botão "Visualizar Tarefas" -->
+                <a href="/waretaskW/pages/secure/tarefa/visualizar_tarefas.php"><button class="btn btn-outline-info ms-2" type="button">Visualizar Tarefas</button></a>
             </div>
         </div>
 
