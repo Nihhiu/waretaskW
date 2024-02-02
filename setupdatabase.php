@@ -23,7 +23,7 @@ $pdo->exec(
         favorito BOOLEAN,
         tarefa TEXT,
         idUsuarioCreador INTEGER NOT NULL,
-        FOREIGN KEY (idUsuarioCreador) REFERENCES usuario(id)
+        FOREIGN KEY (idUsuarioCreador) REFERENCES usuario(id) ON DELETE CASCADE
     );
     CREATE TABLE IF NOT EXISTS anexo (
         idAnexos INTEGER AUTO_INCREMENT PRIMARY KEY,
@@ -31,16 +31,18 @@ $pdo->exec(
         tipoAnexo VARCHAR(20),
         nomeAnexo VARCHAR(100),
         caminhoAnexo VARCHAR(255),
-        FOREIGN KEY (idTarefa) REFERENCES tarefa(idTarefa)
+        FOREIGN KEY (idTarefa) REFERENCES tarefa(idTarefa) ON DELETE CASCADE
     );
     CREATE TABLE IF NOT EXISTS UsuarioTarefaPartilhado (
         usuarioPartilhado INTEGER,
         idTarefa INTEGER,
         PRIMARY KEY (usuarioPartilhado, idTarefa),
-        FOREIGN KEY (usuarioPartilhado) REFERENCES usuario(id),
-        FOREIGN KEY (idTarefa) REFERENCES tarefa(idTarefa)
+        FOREIGN KEY (usuarioPartilhado) REFERENCES usuario(id) ON DELETE CASCADE,
+        FOREIGN KEY (idTarefa) REFERENCES tarefa(idTarefa) ON DELETE CASCADE
     );'
 );
+
+
 
 # TEMP para adicionar user
 /*

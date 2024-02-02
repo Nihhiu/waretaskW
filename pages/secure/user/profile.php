@@ -59,7 +59,7 @@ $user = usuario();
             value="<?= isset($_REQUEST['email']) ? $_REQUEST['email'] : (isset($user['email']) ? $user['email'] : '') ?>" required>
       </div>
       <div class="d-grid col-4 mx-auto">
-        <button class="w-100 btn btn-lg btn-success mb-2" type="submit" name="user" value="profile">Change</button>
+        <button class="w-100 btn btn-lg btn-success mb-2" type="submit" name="usuario" value="profile">Change</button>
       </div>
     </form>
   </section>

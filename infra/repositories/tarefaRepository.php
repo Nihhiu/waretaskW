@@ -129,10 +129,11 @@ function updateTarefa($tarefa)
 }
 
 
-function deleteTarefa($id)
+function deleteTarefa($idTarefa)
 {
+    deletePartilhaByIdTarefa($idTarefa);
     $PDOStatement = $GLOBALS['pdo']->prepare('DELETE FROM tarefa WHERE idTarefa = ?;');
-    $PDOStatement->bindValue(1, $id, PDO::PARAM_INT);
+    $PDOStatement->bindValue(1, $idTarefa, PDO::PARAM_INT);
     return $PDOStatement->execute();
 }
 

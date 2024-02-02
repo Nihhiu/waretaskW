@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '../../db/connection.php';
 
-function createUser($user)
+function criarUsuario($user)
 {
     $user['senha'] = password_hash($user['senha'], PASSWORD_DEFAULT);
     $sqlCreate = "INSERT INTO 
@@ -70,7 +70,7 @@ function getAll()
     return $users;
 }
 
-function updateUser($user)
+function updateUsuario($user)
 {
     if (isset($user['senha']) && !empty($user['senha'])) {
         $user['senha'] = password_hash($user['senha'], PASSWORD_DEFAULT);
@@ -136,7 +136,7 @@ function updatePassword($user)
     }
 }
 
-function deleteUser($id)
+function deleteUsuario($id)
 {
     $PDOStatement = $GLOBALS['pdo']->prepare('DELETE FROM usuario WHERE id = ?;');
     $PDOStatement->bindValue(1, $id, PDO::PARAM_INT);

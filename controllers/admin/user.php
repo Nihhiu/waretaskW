@@ -1,48 +1,50 @@
 <?php
 
-require_once __DIR__ . '/../../infra/repositories/userRepository.php';
+require_once __DIR__ . '/../../infra/repositories/usuarioRepository.php';
+require_once __DIR__ . '/../../infra/repositories/tarefaRepository.php';
+require_once __DIR__ . '/../../infra/repositories/partilhaRepository.php';
 require_once __DIR__ . '/../../helpers/validations/admin/validate-user.php';
 require_once __DIR__ . '/../../helpers/validations/admin/validate-password.php';
 require_once __DIR__ . '/../../helpers/session.php';
 
-if (isset($_POST['user'])) {
-    if ($_POST['user'] == 'create') {
+if (isset($_POST['usuario'])) {
+    if ($_POST['usuario'] == 'create') {
         create($_POST);
     }
 
-    if ($_POST['user'] == 'update') {
+    if ($_POST['usuario'] == 'update') {
         update($_POST);
     }
 
-    if ($_POST['user'] == 'profile') {
+    if ($_POST['usuario'] == 'profile') {
         updateProfile($_POST);
     }
 
-    if ($_POST['user'] == 'password') {
+    if ($_POST['usuario'] == 'senha') {
         changePassword($_POST);
     }
 }
 
-if (isset($_GET['user'])) {
-    if ($_GET['user'] == 'update') {
-        $user = getById($_GET['id']);
-        $user['action'] = 'update';
-        $params = '?' . http_build_query($user);
+if (isset($_GET['usuario'])) {
+    if ($_GET['usuario'] == 'update') {
+        $usuario = getById($_GET['id']);
+        $usuario['action'] = 'update';
+        $params = '?' . http_build_query($usuario);
         header('location: /waretaskW/pages/secure/admin/user.php' . $params);
     }
 
-    if ($_GET['user'] == 'delete') {
-        $user = getById($_GET['id']);
-        if ($user['administrator']) {
-            $_SESSION['errors'] = ['This user cannot be deleted!'];
+    if ($_GET['usuario'] == 'delete') {
+        $usuario = getById($_GET['id']);
+        if ($usuario['administrador']) {
+            $_SESSION['errors'] = ['Este Usuario não pode ser eliminado'];
             header('location: /waretaskW/pages/secure/admin/');
             return false;
         }
 
-        $success = delete_user($user);
+        $success = delete_usuario($usuario);
 
         if ($success) {
-            $_SESSION['success'] = 'User deleted successfully!';
+            $_SESSION['success'] = 'Usuario Eliminado com Sucesso!';
             header('location: /waretaskW/pages/secure/admin/');
         }
     }
@@ -50,7 +52,7 @@ if (isset($_GET['user'])) {
 
 function create($req)
 {
-    $data = validatedUser($req);
+    $data = validarUsuario($req);
 
     if (isset($data['invalid'])) {
         $_SESSION['errors'] = $data['invalid'];
@@ -59,17 +61,17 @@ function create($req)
         return false;
     }
 
-    $success = createUser($data);
+    $success = criarUsuario($data);
 
     if ($success) {
-        $_SESSION['success'] = 'User created successfully!';
+        $_SESSION['success'] = 'usuario created successfully!';
         header('location: /waretaskW/pages/secure/admin/');
     }
 }
 
 function update($req)
 {
-    $data = validatedUser($req);
+    $data = validarUsuario($req);
 
     if (isset($data['invalid'])) {
         $_SESSION['errors'] = $data['invalid'];
@@ -80,10 +82,10 @@ function update($req)
         return false;
     }
 
-    $success = updateUser($data);
+    $success = updateUsuario($data);
 
     if ($success) {
-        $_SESSION['success'] = 'User successfully changed!';
+        $_SESSION['success'] = 'Usuario atualizado com sucesso!';
         $data['action'] = 'update';
         $params = '?' . http_build_query($data);
         header('location: /waretaskW/pages/secure/admin/user.php' . $params);
@@ -92,21 +94,21 @@ function update($req)
 
 function updateProfile($req)
 {
-    $data = validatedUser($req);
+    $data = validarUsuario($req);
 
     if (isset($data['invalid'])) {
         $_SESSION['errors'] = $data['invalid'];
         $params = '?' . http_build_query($req);
         header('location: /waretaskW/pages/secure/user/profile.php' . $params);
         } else {
-        $user = usuario(); 
-        $data['id'] = $user['id'];
-        $data['administrator'] = $user['administrator'];
+        $usuario = usuario(); 
+        $data['id'] = $usuario['id'];
+        $data['administrator'] = $usuario['administrator'];
 
-        $success = updateUser($data);
+        $success = updateUsuario($data);
 
         if ($success) {
-            $_SESSION['success'] = 'User successfully changed!';
+            $_SESSION['success'] = 'usuario successfully changed!';
             $_SESSION['action'] = 'update';
             $params = '?' . http_build_query($data);
             header('location: /waretaskW/pages/secure/user/profile.php' . $params);
@@ -126,13 +128,13 @@ function changePassword($req)
         $success = updatePassword($data);
         if ($success) {
             $_SESSION['success'] = 'Password successfully changed!';
-            header('location: /waretaskW/pages/secure//user/password.php');
+            header('location: /waretaskW/pages/secure/user/password.php');
         }
     }
 }
 
-function delete_user($user)
-{
-    $data = deleteUser($user['id']);
+function delete_usuario($usuario)
+{   
+    $data = deleteUsuario($usuario['id']);
     return $data;
 }

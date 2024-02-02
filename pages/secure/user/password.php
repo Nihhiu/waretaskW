@@ -48,7 +48,7 @@ $user = usuario();
         <input type="senha" class="form-control" name="senha" maxlength="255" required>
       </div>
       <div class="d-grid col-4 mx-auto">
-        <button class="w-100 btn btn-lg btn-success mb-2" type="submit" name="nome" value="senha">Change</button>
+        <button class="w-100 btn btn-lg btn-success mb-2" type="submit" name="usuario" value="senha">Change</button>
       </div>
     </form>
   </section>

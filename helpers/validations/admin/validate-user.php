@@ -1,6 +1,6 @@
 <?php
 
-function validatedUser($req)
+function validarUsuario($req)
 {
     foreach ($req as $key => $value) {
         $req[$key] =  trim($req[$key]);
