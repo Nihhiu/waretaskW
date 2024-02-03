@@ -8,7 +8,7 @@ $user = usuario();
 ?>
 
 <div class="p-5 mb-2 bg-dark text-white">
-  <h1>User</h1>
+  <h1>Perfil</h1>
 </div>
 
 <main>
@@ -58,7 +58,7 @@ $user = usuario();
             value="<?= isset($_REQUEST['senha']) ? $_REQUEST['senha'] : (isset($user['senha']) ? $user['senha'] : '') ?>" required readonly>  
       </div>
       <div class="input-group mb-3">
-        <span class="input-group-text">email</span>
+        <span class="input-group-text">Email</span>
           <input type="email" class="form-control" name="email" maxlength="255"
             value="<?= isset($_REQUEST['email']) ? $_REQUEST['email'] : (isset($user['email']) ? $user['email'] : '') ?>" required>
       </div>
@@ -68,6 +68,7 @@ $user = usuario();
     </form>
   </section>
 </main>
+
 <?php
 include_once __DIR__ . '../../../../templates/footer.php';
 ?>

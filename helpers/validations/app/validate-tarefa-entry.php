@@ -8,8 +8,8 @@ function isTarefaValida($req)
     }
 
     # Verificar o nome
-    if (empty($req['titulo']) || strlen($req['titulo']) < 3 || strlen($req['titulo']) > 100) {
-        $errors['nome'] = 'Campo Titulo inválido, necessita no minimo 3 caracteres.';
+    if (empty($req['titulo']) || strlen($req['titulo']) < 3 || strlen($req['titulo']) > 50) {
+        $errors['nome'] = 'Campo Titulo inválido, necessita no minimo 3 caracteres e no maximo 50.';
     }
     
     # Verificar a prioridade
@@ -19,7 +19,7 @@ function isTarefaValida($req)
     }
 
     # Verificar o estado
-    $estadosValidos = ['To Do', 'Doing', 'Done', 'Due'];
+    $estadosValidos = ['Para Fazer', 'A Fazer', 'Feito', 'Vencido'];
     if (isset($req['estado']) && !in_array($req['estado'], $estadosValidos)) {
         $errors['estado'] = 'Campo Estado inválido, deve ser Pendente, Em progresso ou Concluída.';
     }

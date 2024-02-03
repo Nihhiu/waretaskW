@@ -80,7 +80,6 @@ function updateUsuario($user)
             nome = :nome, 
             username = :username, 
             email = :email, 
-            administrador = :administrador, 
             senha = :senha
         WHERE id = :id;";
 
@@ -91,7 +90,6 @@ function updateUsuario($user)
             ':nome' => $user['nome'],
             ':username' => $user['username'],
             ':email' => $user['email'],
-            ':administrador' => $user['administrador'],
             ':senha' => $user['senha']
         ]);
     }

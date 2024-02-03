@@ -5,31 +5,8 @@ include_once __DIR__ . '../../../../templates/header.php';
 
 $title = ' - Visualizar Tarefa';
 $user = usuario();
-
-// Inicializa os valores dos campos
 $modoVisualizacao = true; // Altere para false se for permitir edição
-$titulo = '';
-$descricao = '';
-$prioridade = '';
-$dataCriacao = '';
-$prazoConclusao = '';
-$estado = '';
-$favorito = '';
-$tarefa = '';
-$idUsuarioCreador = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Se o formulário foi enviado, processa os dados
-    $titulo = $_POST['titulo'] ?? '';
-    $descricao = $_POST['descricao'] ?? '';
-    $prioridade = $_POST['prioridade'] ?? '';
-    $dataCriacao = $_POST['dataCriacao'] ?? '';
-    $prazoConclusao = $_POST['prazoConclusao'] ?? '';
-    $estado = $_POST['estado'] ?? '';
-    $favorito = $_POST['favorito'] ?? '';
-    $tarefa = $_POST['tarefa'] ?? '';
-    $idUsuarioCreador = $_POST['idUsuarioCreador'] ?? '';
-} 
+$tarefa = getTarefaById($_GET['id']);
 
 ?>
 
@@ -38,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 <main>
   <section class="py-4">
-    <a href="/waretaskW/pages/secure/user/profile.php"><button type="button" class="btn btn-secondary px-5">Back</button></a>
+    <a href="/waretaskW/pages/secure/tarefa/visualizar_lista_tarefa.php"><button type="button" class="btn btn-secondary px-5">Back</button></a>
   </section>
   <section>
     <!-- Formulário de criação ou visualização de tarefa -->
