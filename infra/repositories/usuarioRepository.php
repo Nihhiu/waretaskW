@@ -117,12 +117,11 @@ function updateUsuario($user)
 
 function updatePassword($user)
 {
-    if (isset($user['senha']) && !empty($user['senha'])) {
-        $user['senha'] = password_hash($user['senha'], PASSWORD_DEFAULT);
+    if (isset($user['nova_senha']) && !empty($user['nova_senha'])) {
+        $user['nova_senha'] = password_hash($user['nova_senha'], PASSWORD_DEFAULT);
 
         $sqlUpdate = "UPDATE  
         usuario SET
-            nome = :nome, 
             senha = :senha
         WHERE id = :id;";
 
@@ -130,8 +129,7 @@ function updatePassword($user)
 
         return $PDOStatement->execute([
             ':id' => $user['id'],
-            ':nome' => $user['nome'],
-            ':senha' => $user['senha']
+            ':senha' => $user['nova_senha']
         ]);
     }
 }
@@ -144,7 +142,7 @@ function deleteUsuario($id)
 }
 
 function createNewUser($user)
-{
+{   
     $user['senha'] = password_hash($user['senha'], PASSWORD_DEFAULT);
     $sqlCreate = "INSERT INTO 
     usuario (

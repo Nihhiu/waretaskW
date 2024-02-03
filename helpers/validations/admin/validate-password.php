@@ -7,15 +7,17 @@ function passwordIsValid($req)
         $req[$key] = trim($req[$key]);
     }
 
-    if (empty($req['nome']) || strlen($req['nome']) < 3 || strlen($req['nome']) > 255) {
-        $errors['nome'] = 'Campo Nome inválido, necessita no minimo 3 caracteres.';
+    $user = usuario();
+
+    if (!password_verify($req['senha_atual'], $user['senha'])) {
+        $errors['senha_atual'] = "Verificação da Senha incorreto.";
     }
 
-    if (!empty($req['senha']) && strlen($req['senha']) < 3) {
-        $errors['senha'] = 'Campo Senha inválido, necessita no minimo 3 caracteres.';
+    if (!empty($req['nova_senha']) && strlen($req['nova_senha']) < 3) {
+        $errors['nova_senha'] = 'Campo Senha inválido, necessita no minimo 3 caracteres.';
     }
 
-    if (!empty($req['confirmar_senha']) && ($req['confirmar_senha']) != $req['senha']) {
+    if (!empty($req['confirmar_senha']) && ($req['confirmar_senha']) != $req['nova_senha']) {
         $errors['confirmar_senha'] = 'Campo Confirmar Senha não é igual ao campo Senha.';
     }
 

@@ -34,18 +34,32 @@ $user = usuario();
   </section>
   <section>
     <form action="/waretaskW/controllers/admin/user.php" method="post" class="form-control py-3">
-      <div class="input-group mb-3">
-        <span class="input-group-text">Nome</span>
-          <input type="text" readonly class="form-control" name="nome" placeholder="<?= isset($user['nome']) ? $user['nome'] : '' ?>"
-            value="<?= isset($user['nome']) ? $user['nome'] : '' ?>">
+      <!-- Verificar Senha Section -->
+      <div class="row g-1 mb-2">
+        <div class="col-md-12">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Senha Atual</span>
+            <input type="password" class="form-control" name="senha_atual" placeholder="Senha Atual" maxlength="100" size="100"
+                value="<?= isset($_REQUEST['senha_atual']) ? $_REQUEST['senha_atual'] : '' ?>" required>
+          </div>
+        </div>
       </div>
-      <div class="input-group mb-3">
-        <span class="input-group-text">Senha</span>
-        <input type="senha" class="form-control" name="senha" maxlength="255" size="255" required>
-      </div>
-      <div class="input-group mb-3">
-        <span class="input-group-text">Confirmar senha</span>
-        <input type="senha" class="form-control" name="senha" maxlength="255" required>
+      <!-- Nova Senha Section -->
+      <div class="row g-2 mb-2">
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Nova Senha</span>
+            <input type="password" class="form-control" name="nova_senha" placeholder="Nova Senha" maxlength="100" size="100"
+                value="<?= isset($_REQUEST['nova_senha']) ? $_REQUEST['nova_senha'] : '' ?>" required>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <span class="input-group-text">Confirmar Senha</span>
+            <input type="password" class="form-control" name="confirmar_senha" placeholder="Confirmar Senha" maxlength="100" size="100"
+                value="<?= isset($_REQUEST['confirmar_senha']) ? $_REQUEST['confirmar_senha'] : '' ?>" required>
+          </div>
+        </div>
       </div>
       <div class="d-grid col-4 mx-auto">
         <button class="w-100 btn btn-lg btn-success mb-2" type="submit" name="usuario" value="senha">Change</button>

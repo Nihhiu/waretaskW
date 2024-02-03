@@ -55,7 +55,7 @@ $user = usuario();
       <div class="input-group mb-3">
         <span class="input-group-text">Senha</span>
           <input type="password" class="form-control" name="senha" maxlength="9"
-            value="<?= isset($_REQUEST['senha']) ? $_REQUEST['senha'] : (isset($user['senha']) ? $user['senha'] : '') ?>" required readonly>
+            value="<?= isset($_REQUEST['senha']) ? $_REQUEST['senha'] : (isset($user['senha']) ? $user['senha'] : '') ?>" required readonly>  
       </div>
       <div class="input-group mb-3">
         <span class="input-group-text">email</span>

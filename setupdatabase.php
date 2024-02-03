@@ -10,7 +10,7 @@ $pdo->exec(
         nome VARCHAR(50) NOT NULL,  
         email VARCHAR(128) UNIQUE NOT NULL,  
         senha VARCHAR(64) NOT NULL,
-        administrador bit
+        administrador bit DEFAULT 0
     );
     CREATE TABLE IF NOT EXISTS tarefa (
         idTarefa INTEGER AUTO_INCREMENT PRIMARY KEY,

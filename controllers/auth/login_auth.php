@@ -39,7 +39,6 @@ function checkErrors($data, $req)
         $_SESSION['errors'] = $data['invalid'];
         $params = '?' . http_build_query($req);
         header('location: /waretaskW/pages/public/login.php' . $params);
-        return false;
     }
 
     unset($_SESSION['errors']);

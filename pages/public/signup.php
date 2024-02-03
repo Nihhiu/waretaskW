@@ -53,7 +53,7 @@ require_once __DIR__ . '/../../infra/middlewares/middleware-not-authenticated.ph
       </section>
       <!-- Sign Up Form -->
       <form action="../../controllers/auth/signup_auth.php" method="post" class="needs-validation" novalidate>
-        <h1 class="h3 mb-3 fw-normal">Login</h1>
+        <h1 class="h3 mb-3 fw-normal">Sign Up</h1>
         <div class="row g-2 mb-2">
           <div class="col-md-6">
             <div class="form-floating">
@@ -96,7 +96,7 @@ require_once __DIR__ . '/../../infra/middlewares/middleware-not-authenticated.ph
                 <label for="confirmar_senha">Confirmar Senha</label>
             </div>
           </div>
-        </div>  
+        </div>
         <!-- Botão Sign Up -->
         <a class="d-block text-center mt-1"><button class="btn btn-lg btn-success mt-3" type="submit" name="usuario" value="signup">Sign Up</button></a>
       </form> 

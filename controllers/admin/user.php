@@ -36,7 +36,6 @@ if (isset($_GET['usuario'])) {
         if ($usuario['administrador']) {
             $_SESSION['errors'] = ['Este Usuario não pode ser eliminado'];
             header('location: /waretaskW/pages/secure/admin/');
-            return false;
         }
 
         $success = delete_usuario($usuario);
@@ -56,7 +55,6 @@ function create($req)
         $_SESSION['errors'] = $data['invalid'];
         $params = '?' . http_build_query($req);
         header('location: /waretaskW/pages/secure/admin/user.php' . $params);
-        return false;
     }
 
     $success = criarUsuario($data);
@@ -76,8 +74,6 @@ function update($req)
         $_SESSION['action'] = 'update';
         $params = '?' . http_build_query($req);
         header('location: /waretaskW/pages/secure/admin/user.php' . $params);
-
-        return false;
     }
 
     $success = updateUsuario($data);
@@ -117,6 +113,7 @@ function updateProfile($req)
 function changePassword($req)
 {
     $data = passwordIsValid($req);
+
     if (isset($data['invalid'])) {
         $_SESSION['errors'] = $data['invalid'];
         $params = '?' . http_build_query($req);
@@ -125,7 +122,7 @@ function changePassword($req)
         $data['id'] = usuarioID();
         $success = updatePassword($data);
         if ($success) {
-            $_SESSION['success'] = 'Password successfully changed!';
+            $_SESSION['success'] = 'Password foi alterada com sucesso!';
             header('location: /waretaskW/pages/secure/user/password.php');
         }
     }
