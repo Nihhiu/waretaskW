@@ -131,5 +131,20 @@ function changePassword($req)
 function delete_usuario($usuario)
 {   
     $data = deleteUsuario($usuario['id']);
+
+    # Remover a pasta do usuário se existir
+    $caminhoDiretorio = '/waretaskW/assets/' . $usuario['id'] . '/';
+    
+    if (is_dir($caminhoDiretorio)) {
+        # Remover todos os arquivos no diretório
+        $files = array_diff(scandir($caminhoDiretorio), array('.', '..'));
+        foreach ($files as $file) {
+            unlink($caminhoDiretorio . $file);
+        }
+        
+        # Remover o diretório
+        rmdir($caminhoDiretorio);
+    }
+
     return $data;
 }
