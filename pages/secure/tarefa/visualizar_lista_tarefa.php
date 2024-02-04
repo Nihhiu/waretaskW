@@ -47,7 +47,7 @@ $title = '- App';
 
         $tarefas = getTarefaByUsuarioCriador(usuarioID());
 
-        if (is_array($tarefas)) {
+        if (!empty($tarefas)) {
             foreach ($tarefas as $tarefa) {
         ?>  
             <div class="card shadow p-3 mb-5 rounded">

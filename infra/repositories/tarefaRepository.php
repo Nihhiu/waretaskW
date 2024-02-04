@@ -72,7 +72,7 @@ function getAllTarefa()
 
 # CRUD
 
-function createTarefa($tarefa)
+function create_Tarefa($tarefa)
 {
     $sqlCreate = "INSERT INTO 
     tarefa (
@@ -113,12 +113,12 @@ function createTarefa($tarefa)
 
     if ($success) {
         $tarefa['idTarefa'] = $GLOBALS['pdo']->lastInsertId();
-        return true;
+        return $tarefa['idTarefa'];
     }
     return false;
 }
 
-function updateTarefa($tarefa)
+function update_Tarefa($tarefa)
 {
     $sqlUpdate = "UPDATE  
     tarefa SET

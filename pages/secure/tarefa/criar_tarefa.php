@@ -123,9 +123,14 @@ $_REQUEST['idUsuarioCreador'] = usuarioID();
         </div>
 
           <!-- Anexos -->
-
+        <div class="row g-1 mb-2 justify-content-center">
+            <div class="col-md-6">
+              <div class="form-floating mb-3">
+                <input type="file" name="anexo"
+                  value="<?= isset($_FILES['anexo']) ? $_FILES['anexo'] : '' ?>">
+              </div>
+            </div>
         </div>
-        
 
         <!-- Botão de envio -->
         <div class="d-grid col-4 mx-auto">

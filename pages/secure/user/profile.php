@@ -72,7 +72,7 @@ $user = usuario();
             </div>
           </div>
           <div class="col-md-2">
-            <a href="./password.php"><button class="btn btn-warning w-100">Alterar a Senha</button></a>
+            <a href="./password.php" class="btn btn-warning w-100">Alterar a Senha</a>
           </div>
         </div>
 
