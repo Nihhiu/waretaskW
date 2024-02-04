@@ -5,8 +5,7 @@ include_once __DIR__ . '../../../../templates/header.php';
 
 $title = ' - Visualizar Tarefa';
 $user = usuario();
-$modoVisualizacao = true; // Altere para false se for permitir edição
-$tarefa = getTarefaById($_GET['id']);
+$tarefa = getTarefaById($_GET['idTarefa']);
 
 ?>
 
@@ -21,41 +20,15 @@ $tarefa = getTarefaById($_GET['id']);
     <!-- Formulário de criação ou visualização de tarefa -->
     <form action="/waretaskW/controllers/criar_tarefa.php" method="post" class="form-control py-3">
       <!-- Adicione os campos necessários para a tarefa -->
-      <div class="input-group mb-3">
-        <span class="input-group-text">Título</span>
-        <input type="text" class="form-control" name="titulo" <?php echo $modoVisualizacao ? 'readonly' : ''; ?> value="<?php echo $titulo; ?>" required>
-      </div>
-      <div class="input-group mb-3">
-        <span class="input-group-text">Descrição</span>
-        <textarea class="form-control" name="descricao" <?php echo $modoVisualizacao ? 'readonly' : ''; ?> required><?php echo $descricao; ?></textarea>
-      </div>
-      <div class="input-group mb-3">
-        <span class="input-group-text">Prioridade</span>
-        <input type="text" class="form-control" name="prioridade" <?php echo $modoVisualizacao ? 'readonly' : ''; ?> value="<?php echo $prioridade; ?>" required>
-      </div>
-      <div class="input-group mb-3">
-        <span class="input-group-text">Data de Criação</span>
-        <input type="text" class="form-control" name="dataCriacao" <?php echo $modoVisualizacao ? 'readonly' : ''; ?> value="<?php echo $dataCriacao; ?>" required>
-      </div>
-      <div class="input-group mb-3">
-        <span class="input-group-text">Prazo de Conclusão</span>
-        <input type="text" class="form-control" name="prazoConclusao" <?php echo $modoVisualizacao ? 'readonly' : ''; ?> value="<?php echo $prazoConclusao; ?>" required>
-      </div>
-      <div class="input-group mb-3">
-        <span class="input-group-text">Estado</span>
-        <input type="text" class="form-control" name="estado" <?php echo $modoVisualizacao ? 'readonly' : ''; ?> value="<?php echo $estado; ?>" required>
-      </div>
-      <div class="input-group mb-3">
-        <span class="input-group-text">Favorito</span>
-        <input type="text" class="form-control" name="favorito" <?php echo $modoVisualizacao ? 'readonly' : ''; ?> value="<?php echo $favorito; ?>" required>
-      </div>
-      <div class="input-group mb-3">
-        <span class="input-group-text">Tarefa</span>
-        <input type="text" class="form-control" name="tarefa" <?php echo $modoVisualizacao ? 'readonly' : ''; ?> value="<?php echo $tarefa; ?>" required>
-      </div>
-      <div class="input-group mb-3">
-        <span class="input-group-text">ID do Usuário Criador</span>
-        <input type="text" class="form-control" name="idUsuarioCreador" <?php echo $modoVisualizacao ? 'readonly' : ''; ?> value="<?php echo $idUsuarioCreador; ?>" required>
+      <div class="col-md-6 h-100 p-5">
+        <h1 class="display-5 fw-bold"><?= $titulo ?? null ?></h1>
+        <p class="lead mt-5">Tem até <?= $prazoConclusao ?? null ?> para realizar</p>
+        <p class="lead mt-4">Descrição: <?= $descricao ?? null ?></p>
+        <p class="lead">Prioridade: <?= $prioridade ?? null ?></p>
+        <p class="lead">Data de Criação: <?= $dataCriacao ?? null ?></p>
+        <p class="lead">Estado: <?= $estado ?? null ?></p>
+        <p class="lead">Favorito: <?= $favorito ?? null ?></p>
+        <p class="lead">ID do Usuário Criador: <?= $idUsuarioCreador ?? null ?></p>
       </div>
 
       <!-- Botão de envio (somente se estiver no modo de edição) -->
