@@ -21,7 +21,7 @@ $title = '- App';
 
     <div class="container">
         <section class="py-4">
-            <a href="/waretaskW/pages/secure/.php"><button type="button" class="btn btn-secondary px-5">Back</button></a>
+            <a href="/waretaskW/pages/secure/"><button type="button" class="btn btn-secondary px-5">Back</button></a>
             <a href="/waretaskW/pages/secure/tarefa/criar_tarefa.php"><button type="button" class="btn btn-primary px-5">Criar Tarefa</button></a>
         </section>
 
