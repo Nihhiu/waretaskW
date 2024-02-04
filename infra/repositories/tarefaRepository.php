@@ -18,8 +18,9 @@ function getTarefaByUsuarioCriador($idUsuarioCreador)
     ;');
     $PDOStatement->bindValue(':idUsuarioCreador', $idUsuarioCreador, PDO::PARAM_INT);
     $PDOStatement->execute();
-    return $PDOStatement->fetch(PDO::FETCH_ASSOC);
+    return $PDOStatement->fetchAll(PDO::FETCH_ASSOC);
 }
+
 
 function getUltimaTarefa($idUsuarioCreador)
 {
@@ -149,9 +150,8 @@ function updateTarefa($tarefa)
 }
 
 
-function deleteTarefa($idTarefa)
+function deleteTarefaDB($idTarefa)
 {
-    deletePartilhaByIdTarefa($idTarefa);
     $PDOStatement = $GLOBALS['pdo']->prepare('DELETE FROM tarefa WHERE idTarefa = ?;');
     $PDOStatement->bindValue(1, $idTarefa, PDO::PARAM_INT);
     return $PDOStatement->execute();

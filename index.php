@@ -24,30 +24,21 @@ require_once __DIR__ . '/setupdatabase.php';
 
     <!-- HEADER -->
     <nav class="navbar navbar-expand-lg">
-        <div class="container container-color">
-            <a class="navbar-brand" href="/waretaskW/index.php" >
-                <p style="font-weight: 700; font-size: 24px;"><img src="assets/images/Logo.png" alt="logo" width="100"
-                        height="100" style="margin-left: 80px;"> WareTask</p>
+        <div class="container-fluid container-color">
+            <a class="navbar-brand" href="/waretaskW/pages/secure/">
+            <p style="font-weight: 700; font-size: 24px;"><img src="/waretaskW/assets/images/Logo.png" alt="logo" width="100"
+                height="100" style="margin-left: 10vh;"> WareTask</p>
             </a>
-        </div>
-
-        <div class="align-content-end">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="btn btn-outline-secondary shadow-sm d-sm d-block nav-link" href="pages/public/login.php">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-outline-secondary shadow-sm d-sm d-block nav-link" href="pages/public/signup.php">Sign up</a>
-                </li>
-            </ul>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav" style="margin-right: 10vh;">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-outline-secondary shadow-sm d-sm d-block nav-link" href="pages/public/login.php">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-secondary shadow-sm d-sm d-block nav-link" href="pages/public/signup.php">Sign up</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
     <!-- Apresenta a página inicial -->

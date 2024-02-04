@@ -13,7 +13,7 @@ if (isset($_POST['tarefa_cont'])) {
     }
 
     if ($_POST['tarefa_cont'] == 'delete') {
-        delete($_POST);
+        deleteTarefa($_POST);
     }
 }
 
@@ -66,26 +66,13 @@ function update($req)
     }
 }
 
-function delete($req)
-{
-    # Verificar o preenchimento dos campos obrigatórios
-    $data = isTarefaValida($req);
-
-    # Se retornar inválido, um erro foi retornado
-    if (isset($data['invalid'])) {
-
-        $_SESSION['errors'] = $data['invalid'];
-        
-        $params = '?' . http_build_query($req);
-
-        header('location: /waretaskW/pages/secure/tarefa/visualizar_tarefa.php' . $params);
-    } 
-
+function deleteTarefa($req)
+{   
     # Criar um novo usuário com as informações fornecidas
-    $success = deleteTarefa($data);
+    $success = deleteTarefaDB($req);
 
     if ($success) {
         $_SESSION['success'] = 'Tarefa Eliminada com sucesso!';
-        header('location: /waretaskW/pages/secure/tarefa/visualizar_tarefa.php');
+        header('location: /waretaskW/pages/secure/tarefa/visualizar_lista_tarefa.php');
     }
 }

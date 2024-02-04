@@ -13,37 +13,80 @@ $title = '- App';
 </head>
 
 <div class="p-5 mb-2 bg-dark text-white">
-  <h1>Tarefas</h1>
+  <h1 class="container">Tarefas</h1>
 </div>
 
 <main>
-    <section class="py-4">
-        <a href="/waretaskW/pages/secure/user/profile.php"><button type="button" class="btn btn-secondary px-5">Back</button></a>
-    </section>
+    
 
-    <?php
+    <div class="container">
+        <section class="py-4">
+            <a href="/waretaskW/pages/secure/.php"><button type="button" class="btn btn-secondary px-5">Back</button></a>
+            <a href="/waretaskW/pages/secure/tarefa/criar_tarefa.php"><button type="button" class="btn btn-primary px-5">Criar Tarefa</button></a>
+        </section>
 
-    $tarefas = getTarefaByUsuarioCriador($user['id']);
+        <section>
+            <?php
+            if (isset($_SESSION['success'])) {
+                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">';
+                echo $_SESSION['success'] . '<br>';
+                echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+                unset($_SESSION['success']);
+            }
+            if (isset($_SESSION['errors'])) {
+                echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
+                foreach ($_SESSION['errors'] as $error) {
+                echo $error . '<br>';
+                }
+                echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+                unset($_SESSION['errors']);
+            }
+            ?>
+        </section>
+        <?php
 
-    if (is_array($tarefas)) {
-        foreach ($tarefas as $tarefa) {
-    ?>
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Título</span>
-                    <a href="visualizar_tarefa.php?id=<?php echo $tarefa['idTarefa']; ?>">
-                        <input type="text" class="form-control" name="titulo" value="<?php echo $tarefa['titulo']; ?>" required>
-                    </a>
+        $tarefas = getTarefaByUsuarioCriador(usuarioID());
+
+        if (is_array($tarefas)) {
+            foreach ($tarefas as $tarefa) {
+        ?>  
+            <div class="card shadow p-3 mb-5 rounded">
+                <div class="row g-2">
+                    <div class="col-md-6">
+                        <h1 class="display-5 fw-bold "><?= $tarefa['titulo'] ?? null ?></h1>
+                        <p class="lead mt-2"><?= $tarefa['estado'] ?? null ?></p>
+                        <p class="lead mt-2"><?= $tarefa['prioridade'] ?? null ?> Importância</p>
+                        <p class="lead mt-2">Até: <?= $tarefa['prazoConclusao'] ?? null ?></p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row g-1">
+                            <a href='visualizar_tarefa.php?idTarefa=<?= $tarefa['idTarefa'] ?>' class='btn btn-primary mt-2 w-100'>Visualizar Tarefa</a>    
+                        </div>
+                        
+                        <div class="row g-1">
+                            <form action="/waretaskW/controllers/tarefa/tarefa_controller.php" method="post">
+                                <a href='visualizar_tarefa.php?idTarefa=<?= $tarefa['idTarefa'] ?>'>
+                                <button class="btn btn-danger mt-2 w-100" type="submit" name="tarefa_cont" value="delete">Eliminar Tarefa</button>
+                                </a>
+                            </form>
+                        </div>
+
+                        <div class="row g-1">
+                            <a href='editar_tarefa.php?idTarefa=<?= $tarefa['idTarefa'] ?>' class='btn btn-warning mt-2 w-100'>Editar Tarefa</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text">Estado</span>
-                    <input type="text" class="form-control" name="estado" value="<?php echo $tarefa['estado']; ?>" required>
-                </div>
-    <?php
+            </div>
+                    
+        <?php
+            }
+        } else {
+            header('Location: criar_tarefa.php');
         }
-    } else {
-        header('Location: criar_tarefa.php');
-    }
-    ?>
+        ?>  
+          
+    </div>
+    
 </main>
 
 <?php
