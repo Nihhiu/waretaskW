@@ -104,11 +104,9 @@ $_REQUEST['idUsuarioCreador'] = usuarioID();
           <!-- Favorito -->
         <div class="row g-1 mb-2 justify-content-center">
             <div class="col-md-6">
-              <div class="form-floating mb-3">
-                <span class="input-group">Favorito 
-                  <input type="checkbox" class="form-check-input" name="favorito" value="1" <?= isset($_REQUEST['favorito']) ? 'checked' : '' ?>>
-                </span>
-              </div>
+              <span class="input-group">Favorito 
+                <input type="checkbox" class="form-check-input" name="favorito" value="1" <?= isset($_REQUEST['favorito']) && $_REQUEST['favorito'] == 1 ? 'checked' : '' ?>>
+              </span>
             </div>
         </div>
           <!-- Tipo de Tarefa -->

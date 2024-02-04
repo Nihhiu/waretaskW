@@ -34,7 +34,7 @@ function isTarefaValida($req)
     }
 
     if (!getById($req['idUsuarioCreador'])) {
-        $errors['idUsuarioCreador'] = 'O correu um erro ao criar a Tarefa, por favor volte a registar no sistema';
+        $errors['idUsuarioCreador'] = 'O correu um erro ao processar a Tarefa, por favor volte a registar no sistema';
         return ['invalid' => $errors];
     }
     

@@ -54,11 +54,26 @@ function getTarefaPartilhada($idUsuarioCreador)
 
 function getTarefaById($id)
 {
+    # Buscar a tarefa
     $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM tarefa WHERE idTarefa = ? LIMIT 1;');
     $PDOStatement->bindValue(1, $id);
     $PDOStatement->execute();
-    return $PDOStatement->fetch();
+    $tarefa = $PDOStatement->fetch();
+
+    # Buscar o anexo relacionado à tarefa
+    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM anexo WHERE idTarefa = ? LIMIT 1;');
+    $PDOStatement->bindValue(1, $id);
+    $PDOStatement->execute();
+    $anexo = $PDOStatement->fetch();
+
+    # Adicionar o anexo à tarefa se ele existir
+    if ($anexo !== false) {
+        $tarefa['anexo'] = $anexo;
+    }
+
+    return $tarefa;
 }
+
 
 function getAllTarefa()
 {
@@ -129,8 +144,7 @@ function update_Tarefa($tarefa)
         prazoConclusao = :prazoConclusao,
         estado = :estado,
         favorito = :favorito,
-        tarefa = :tarefa,
-        idUsuarioCreador = :idUsuarioCreador
+        tarefa = :tarefa
     WHERE idTarefa = :idTarefa;";
 
     $PDOStatement = $GLOBALS['pdo']->prepare($sqlUpdate);
@@ -144,8 +158,7 @@ function update_Tarefa($tarefa)
         ':prazoConclusao' => isset($tarefa['prazoConclusao']) ? date('Y-m-d', strtotime(str_replace('/', '-', $tarefa['prazoConclusao']))) : null,
         ':estado' => $tarefa['estado'],
         ':favorito' => isset($tarefa['favorito']) ? 1 : 0,
-        ':tarefa' => ($tarefa['tarefa']),
-        ':idUsuarioCreador' => ($tarefa['idUsuarioCreador']),
+        ':tarefa' => ($tarefa['tarefa'])
     ]);
 }
 
