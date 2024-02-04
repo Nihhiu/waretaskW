@@ -7,14 +7,31 @@ require_once __DIR__ . '../../db/connection.php';
 function getTarefaByUsuarioCriador($idUsuarioCreador)
 {
     $PDOStatement = $GLOBALS['pdo']->prepare('
-    (SELECT t.idTarefa, t.titulo , t.estado FROM tarefa t 
+    (SELECT t.* FROM tarefa t 
     WHERE t.idUsuarioCreador = :idUsuarioCreador 
     ORDER BY t.prazoConclusao)
     UNION 
-    (SELECT t.idTarefa, t.titulo , t.estado FROM tarefa t 
+    (SELECT t.* FROM tarefa t 
     JOIN UsuarioTarefaPartilhado utp ON t.idTarefa = utp.idTarefa 
     WHERE utp.usuarioPartilhado = :idUsuarioCreador 
     ORDER BY t.prazoConclusao)
+    ;');
+    $PDOStatement->bindValue(':idUsuarioCreador', $idUsuarioCreador, PDO::PARAM_INT);
+    $PDOStatement->execute();
+    return $PDOStatement->fetch(PDO::FETCH_ASSOC);
+}
+
+function getUltimaTarefa($idUsuarioCreador)
+{
+    $PDOStatement = $GLOBALS['pdo']->prepare('
+    (SELECT t.* FROM tarefa t 
+    WHERE t.idUsuarioCreador = :idUsuarioCreador AND (t.estado = "A Fazer" OR t.estado = "Por Fazer")
+    ORDER BY t.prazoConclusao LIMIT 1)
+    UNION 
+    (SELECT t.* FROM tarefa t 
+    JOIN UsuarioTarefaPartilhado utp ON t.idTarefa = utp.idTarefa 
+    WHERE utp.usuarioPartilhado = :idUsuarioCreador AND (t.estado = "A Fazer" OR t.estado = "Por Fazer")
+    ORDER BY t.prazoConclusao LIMIT 1)
     ;');
     $PDOStatement->bindValue(':idUsuarioCreador', $idUsuarioCreador, PDO::PARAM_INT);
     $PDOStatement->execute();
