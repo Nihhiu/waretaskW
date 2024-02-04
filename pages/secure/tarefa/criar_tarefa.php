@@ -38,7 +38,7 @@ $_REQUEST['idUsuarioCreador'] = usuarioID();
     </section>
     <section>
       <!-- Formulário de criação de tarefa -->
-      <form action="/waretaskW/controllers/tarefa/tarefa_controller.php" method="post" class="form-control py-3">
+      <form action="/waretaskW/controllers/tarefa/tarefa_controller.php" method="post" enctype="multipart/form-data" class="form-control py-3">
         <!-- Adicione os campos necessários para a tarefa -->
         <div class="align-items-center">
           <!-- Titulo -->
