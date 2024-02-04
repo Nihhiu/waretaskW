@@ -65,7 +65,7 @@ $title = '- App';
                         
                         <div class="row g-1">
                             <form action="/waretaskW/controllers/tarefa/tarefa_controller.php" method="post">
-                                <a href='visualizar_tarefa.php?idTarefa=<?= $tarefa['idTarefa'] ?>'>
+                                <input type="hidden" name="idTarefa" value="<?= $tarefa['idTarefa'] ?>">
                                 <button class="btn btn-danger mt-2 w-100" type="submit" name="tarefa_cont" value="delete">Eliminar Tarefa</button>
                                 </a>
                             </form>

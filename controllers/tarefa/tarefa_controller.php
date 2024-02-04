@@ -24,7 +24,8 @@ function criarTarefa($req)
     $req['idUsuarioCreador'] = usuarioID();
     $data = isTarefaValida($req);
     $anexo = array();
-    $anexoRecebido = $_FILES['anexo'];
+    
+    
 
     # Se retornar inválido, um erro foi retornado
     if (isset($data['invalid'])) {
@@ -38,25 +39,48 @@ function criarTarefa($req)
     
     # Criar uma nova tarefa com as informações fornecidas
     $success = create_Tarefa($data);
+    
+    if (isset($_FILES['anexo'])) {
+        $anexoRecebido = $_FILES['anexo'];
 
-    # Verifique se o arquivo foi carregado sem erros
-    if ($anexoRecebido['error'] == 0) {
-        $anexo['idTarefa'] = $success['idTarefa'];
-        $anexo['tipoAnexo'] = $anexoRecebido['type'];
-        $anexo['nomeAnexo'] = $anexoRecebido['name'];
-        $anexo['caminhoAnexo'] = '/waretaskW/assets/' . $anexoRecebido['name'];
+        if ($anexoRecebido['error'] == 0) {
+            $anexo['idTarefa'] = $success;
+            $anexo['tipoAnexo'] = $anexoRecebido['type'];
+            $anexo['nomeAnexo'] = $anexoRecebido['name'];
 
-        # Mover o arquivo para o diretório de anexos
-        if (move_uploaded_file($anexoRecebido['tmp_name'], $anexo['caminhoAnexo'])) {
-            echo "O anexo foi carregado com sucesso.";
-            criarAnexo($req);
+            # Obter o ID do usuário
+            $idUsuario = usuarioID();
+
+            # Criar o caminho do diretório com o ID do usuário
+            $caminhoDiretorio = '/waretaskW/assets/' . $idUsuario . '/';
+
+            # Verificar se o diretório existe, se não, criar o diretório
+            if (!file_exists($caminhoDiretorio)) {
+                mkdir($caminhoDiretorio, 0777, true);
+            }
+
+            # Atualizar o caminho do anexo para incluir o diretório do usuário
+            $anexo['caminhoAnexo'] = $caminhoDiretorio . $anexoRecebido['name'];
+
+    
+            # Mover o arquivo para o diretório de anexos
+            if (move_uploaded_file($anexoRecebido['tmp_name'], $anexo['caminhoAnexo'])) {
+                "O anexo foi carregado com sucesso.";
+                criarAnexo($anexo);
+            } else {
+                $_SESSION['erros'] = "Ocorreu um erro ao carregar o anexo.";
+                header('location: /waretaskW/pages/secure/tarefa/criar_tarefa.php');
+            }
         } else {
-            echo "Ocorreu um erro ao carregar o anexo.";
+            $_SESSION['erros'] = "Ocorreu um erro ao carregar o anexo.";
+            header('location: /waretaskW/pages/secure/tarefa/criar_tarefa.php');
         }
     } else {
-        echo "Ocorreu um erro ao carregar o anexo.";
+        $_SESSION['success'] = 'Nenhum anexo carregado!';
+        header('location: /waretaskW/pages/secure/tarefa/visualizar_lista_tarefa.php');
     }
 
+    # Verifique se o arquivo foi carregado sem erros
     if ($success) {
         $_SESSION['success'] = 'Tarefa Criada com sucesso!';
         header('location: /waretaskW/pages/secure/tarefa/visualizar_lista_tarefa.php');
@@ -90,7 +114,7 @@ function updateTarefa($req)
 function deleteTarefa($req)
 {   
     # Criar um novo usuário com as informações fornecidas
-    $success = deleteTarefaDB($req);
+    $success = deleteTarefaDB($req['idTarefa']);
 
     if ($success) {
         $_SESSION['success'] = 'Tarefa Eliminada com sucesso!';
