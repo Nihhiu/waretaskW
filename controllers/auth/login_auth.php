@@ -9,7 +9,7 @@ require_once __DIR__ . '/../../helpers/validations/app/validate-login-password.p
 
 if (isset($_POST['usuario'])) {
     if ($_POST['usuario'] == 'login') {
-        login($_POST['email_or_username'],$_POST['senha']);
+        login($_POST);
     }
 
     if ($_POST['usuario'] == 'logout') {
@@ -17,10 +17,8 @@ if (isset($_POST['usuario'])) {
     }
 }
 
-function login($emailusername,$senha)
+function login($req)
 {   
-    $req['email_or_username'] = $emailusername;
-    $req['senha'] = $senha;
 
     $data = ValidacaoLogin($req);
 

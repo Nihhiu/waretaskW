@@ -17,7 +17,7 @@ $_REQUEST = getTarefaById($_GET['idTarefa']);
 <main>
   <div class="container">
     <section class="py-4">
-      <a href="/waretaskW/pages/secure/"><button type="button" class="btn btn-secondary px-5">Back</button></a>
+      <a href='visualizar_tarefa.php?idTarefa=<?= $_REQUEST['idTarefa'] ?>'><button type="button" class="btn btn-secondary px-5">Back</button></a>
     </section>
     <section>
       <?php
@@ -107,9 +107,9 @@ $_REQUEST = getTarefaById($_GET['idTarefa']);
         <div class="row g-1 mb-2 justify-content-center">
             <div class="col-md-6">
               <div class="form-floating mb-3">
-              <span class="input-group">Favorito 
-                <input type="checkbox" class="form-check-input" name="favorito" value="1" <?= isset($_REQUEST['favorito']) && $_REQUEST['favorito'] == 1 ? 'checked' : '' ?>>
-              </span>
+                <span class="input-group">Favorito 
+                  <input type="checkbox" class="form-check-input" name="favorito" value="1" <?= isset($_REQUEST['favorito']) && $_REQUEST['favorito'] == 1 ? 'checked' : '' ?>>
+                </span>
               </div>
             </div>
         </div>
@@ -132,10 +132,10 @@ $_REQUEST = getTarefaById($_GET['idTarefa']);
                     <?php if (isset($_REQUEST['anexo'])): ?>
                         <!-- Se um anexo existir, mostrar um link para baixar o anexo e um botão para deletar o anexo -->                        
                         <a><?= $_REQUEST['anexo']['nomeAnexo'] ?></a>
-                        <a href="<?= $_REQUEST['anexo']['caminhoAnexo'] ?>" download>Download Anexo</a>
+                        <a href="<?= $_REQUEST['anexo']['caminhoAnexo'] ?>" class="btn btn-primary" download>Descarregar Anexo</a>
                         <input type="hidden" name="idAnexos" value="<?= $_REQUEST['anexo']['idAnexos'] ?>">
                         <input type="hidden" name="caminhoAnexo" value="<?= $_REQUEST['anexo']['caminhoAnexo'] ?>">
-                        <button name="tarefa_cont" value="deleteAnexo" type="submit">Deletar Anexo</button>
+                        <button name="tarefa_cont" value="deleteAnexo" type="submit" class="btn btn-danger">Deletar Anexo</button>
                     <?php else: ?>
                         <!-- Se nenhum anexo existir, mostrar um campo para carregar um anexo -->
                         <div class="row g-1 mb-2 justify-content-center">
@@ -153,7 +153,7 @@ $_REQUEST = getTarefaById($_GET['idTarefa']);
 
         <!-- Botão de envio -->
         <div class="d-grid col-4 mx-auto">
-          <button class="w-100 btn btn-lg btn-success mb-2" type="submit" name="tarefa_cont" value="update">Editar Tarefa</button>
+          <button class="w-100 btn btn-lg btn-success mb-2" type="submit" name="tarefa_cont" value="update">Submeter Alterações</button>
         </div>
       </form>
     </section>  

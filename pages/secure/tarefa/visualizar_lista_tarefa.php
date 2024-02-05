@@ -63,13 +63,19 @@ $title = '- App';
                             <a href='visualizar_tarefa.php?idTarefa=<?= $tarefa['idTarefa'] ?>' class='btn btn-primary mt-2 w-100'>Visualizar Tarefa</a>    
                         </div>
                         
-                        <div class="row g-1">
-                            <form action="/waretaskW/controllers/tarefa/tarefa_controller.php" method="post">
-                                <input type="hidden" name="idTarefa" value="<?= $tarefa['idTarefa'] ?>">
-                                <button class="btn btn-danger mt-2 w-100" type="submit" name="tarefa_cont" value="delete">Eliminar Tarefa</button>
-                                </a>
-                            </form>
-                        </div>
+                        <?php
+                        if ($tarefa['idUsuarioCreador'] == usuarioID()){
+                        ?>
+                            <div class="row g-1">
+                                <form action="/waretaskW/controllers/tarefa/tarefa_controller.php" method="post">
+                                    <input type="hidden" name="idTarefa" value="<?= $tarefa['idTarefa'] ?>">
+                                    <button class="btn btn-danger mt-2 w-100" type="submit" name="tarefa_cont" value="delete">Eliminar Tarefa</button>
+                                    </a>
+                                </form>
+                            </div>
+                        <?php
+                        }
+                        ?>
 
                         <div class="row g-1">
                             <a href='editar_tarefa.php?idTarefa=<?= $tarefa['idTarefa'] ?>' class='btn btn-warning mt-2 w-100'>Editar Tarefa</a>
