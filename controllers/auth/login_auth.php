@@ -9,7 +9,7 @@ require_once __DIR__ . '/../../helpers/validations/app/validate-login-password.p
 
 if (isset($_POST['usuario'])) {
     if ($_POST['usuario'] == 'login') {
-        login($_POST);
+        login($_POST['email_or_username'],$_POST['senha']);
     }
 
     if ($_POST['usuario'] == 'logout') {
@@ -17,32 +17,29 @@ if (isset($_POST['usuario'])) {
     }
 }
 
-function login($req)
-{
-    $data = isLoginValid($req);
-    $valido = checkErrors($data, $req);
+function login($emailusername,$senha)
+{   
+    $req['email_or_username'] = $emailusername;
+    $req['senha'] = $senha;
 
-    if ($valido) {
-        $data = isPasswordValid($data);
-    }
+    $data = ValidacaoLogin($req);
 
-    $user = checkErrors($data, $req);
-
-    if ($user) {
-        doLogin($data);
-    }
-}
-
-function checkErrors($data, $req)
-{
     if (isset($data['invalid'])) {
         $_SESSION['errors'] = $data['invalid'];
         $params = '?' . http_build_query($req);
         header('location: /waretaskW/pages/public/login.php' . $params);
-    }
+    } else {
+        
+        $data = isPasswordValid($req);
 
-    unset($_SESSION['errors']);
-    return true;
+        if (isset($data['invalid'])) {
+            $_SESSION['errors'] = $data['invalid'];
+            $params = '?' . http_build_query($req);
+            header('location: /waretaskW/pages/public/login.php' . $params);
+        } else {
+            doLogin($data);
+        } 
+    }     
 }
 
 function doLogin($data)

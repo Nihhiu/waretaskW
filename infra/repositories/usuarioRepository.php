@@ -45,7 +45,7 @@ function getById($id)
 
 function getByEmail($email)
 {
-    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM usuario WHERE email = ? LIMIT 1;');
+    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM usuario WHERE email = ?;');
     $PDOStatement->bindValue(1, $email);
     $PDOStatement->execute();
     return $PDOStatement->fetch();
@@ -53,7 +53,7 @@ function getByEmail($email)
 
 function getByUsername($username)
 {
-    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM usuario WHERE username = ? LIMIT 1;');
+    $PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM usuario WHERE username = ?;');
     $PDOStatement->bindValue(1, $username);
     $PDOStatement->execute();
     return $PDOStatement->fetch();

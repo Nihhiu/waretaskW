@@ -45,44 +45,53 @@ $pdo->exec(
 
 
 # TEMP para adicionar user
-/*
+
 # Adicionar user padrão
 $user = [
     'nome' => 'Gabriel',
     'username' => 'NihhiuOnTheBeat',
     'email' => 'nihhiu@estg.ipvc.pt',
-    'administrador' => true,
+    'administrador' => 1,
     'senha' => '123456'
 ];
 
 # Encriptar a password
 $user['senha'] = password_hash($user['senha'], PASSWORD_DEFAULT);
 
-#INSERT USER
-$sqlCreate = "INSERT INTO 
-    usuario (
-        nome, 
-        username,
-        email,
-        administrador,
-        senha) 
-    VALUES (
-        :nome, 
-        :username, 
-        :email,
-        :administrador, 
-        :senha
-    )";
+# Verificar se o username já existe
+$PDOStatement = $GLOBALS['pdo']->prepare('SELECT * FROM usuario WHERE username = ? LIMIT 1;');
+$PDOStatement->bindValue(1, $user['username']);
+$PDOStatement->execute();
+$userExists = $PDOStatement->fetch();
 
-#PREPARE QUERY
-$PDOStatement = $GLOBALS['pdo']->prepare($sqlCreate);
+if (!$userExists) {
+    #INSERT USER
+    $sqlCreate = "INSERT INTO 
+        usuario (
+            nome, 
+            username,
+            email,
+            administrador,
+            senha) 
+        VALUES (
+            :nome, 
+            :username, 
+            :email,
+            :administrador, 
+            :senha
+        )";
 
-#EXECUTE
-$success = $PDOStatement->execute([
-    ':nome' => $user['nome'],
-    ':username' => $user['username'],
-    ':email' => $user['email'],
-    ':administrador' => $user['administrador'],
-    ':senha' => $user['senha']
-]);
-*/
+    #PREPARE QUERY
+    $PDOStatement = $GLOBALS['pdo']->prepare($sqlCreate);
+
+    #EXECUTE
+    $success = $PDOStatement->execute([
+        ':nome' => $user['nome'],
+        ':username' => $user['username'],
+        ':email' => $user['email'],
+        ':administrador' => $user['administrador'],
+        ':senha' => $user['senha']
+    ]);
+} else {
+    echo "O nome de usuário já existe no sistema.";
+}

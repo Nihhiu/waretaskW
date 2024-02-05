@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../infra/repositories/usuarioRepository.php';
+require_once __DIR__ . '/../auth/login_auth.php';
 require_once __DIR__ . '/../../helpers/validations/admin/validate-user.php';
 require_once __DIR__ . '/../../helpers/validations/admin/validate-password.php';
 require_once __DIR__ . '/../../helpers/session.php';
@@ -20,6 +21,10 @@ if (isset($_POST['usuario'])) {
 
     if ($_POST['usuario'] == 'senha') {
         changePassword($_POST);
+    }
+
+    if ($_POST['usuario'] == 'delete') {
+        delete_usuario($_POST);
     }
 }
 
@@ -146,5 +151,6 @@ function delete_usuario($usuario)
         rmdir($caminhoDiretorio);
     }
 
-    return $data;
+    logout();
+    exit();
 }

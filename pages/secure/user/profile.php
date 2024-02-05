@@ -16,6 +16,10 @@ $user = usuario();
     <section class="py-4">
       <div class="d-flex justify-content">
         <a href="/waretaskW/"><button type="button" class="btn btn-secondary px-5 me-2">Back</button></a>
+        <form action="/waretaskW/controllers/admin/user.php" method="post" class=" px-5 me-2 justify-content-center">
+          <input type="hidden" name="id" value="<?= $user['id'] ?>">
+          <button class="btn btn-danger btn-lg" type="submit" name="usuario" value="delete">Eliminar a Conta</button>
+        </form>
         <form action="/waretaskW/controllers/auth/login_auth.php" method="post" class="position-absolute top-0 end-0 mt-2 me-2">
           <button class="btn btn-danger btn-lg" type="submit" name="usuario" value="logout">Logout</button>
         </form>
@@ -90,6 +94,7 @@ $user = usuario();
           <button class="w-100 btn btn-lg btn-success mb-2" type="submit" name="usuario" value="profile">Change</button>
         </div>
       </form>
+      
     </section> 
   </div>
   

@@ -33,10 +33,16 @@ require_once __DIR__ . '/../../infra/middlewares/middleware-not-authenticated.ph
     <!-- Diz o que o utilizador precisa para proceder -->
     <main>
       <div class="container">
-        
+      <h1 class="h3 mb-3 fw-normal">Login</h1>
         <!-- Feedback sobre Sign up -->
         <section>
           <?php
+          if (isset($_SESSION['success'])) {
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">';
+            echo $_SESSION['success'] . '<br>';
+            echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
+            unset($_SESSION['success']);
+          }
           if (isset($_SESSION['errors'])) {
             echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
             foreach ($_SESSION['errors'] as $error) {
@@ -47,18 +53,17 @@ require_once __DIR__ . '/../../infra/middlewares/middleware-not-authenticated.ph
           }
           ?>
         </section>
-        <!-- Sign Up Form -->
+        <!-- Login Form -->
         <form action="../../controllers/auth/login_auth.php" method="post">
-          <h1 class="h3 mb-3 fw-normal">Login</h1>
           <div class="form-floating mb-2">
-            <input type="text" class="form-control" id="EmailOrUsername" placeholder="Email or Username" name="email_or_username" maxlength="255"
+            <input type="text" class="form-control" id="email_or_username" placeholder="Email or Username" name="email_or_username" maxlength="255"
               value="<?= isset($_REQUEST['email_or_username']) ? $_REQUEST['email_or_username'] : null ?>">
-            <label for="EmailOrUsername">Email ou Username</label>
+            <label for="email_or_username">Email ou Username</label>
           </div>
           <div class="form-floating mb-2">
             <input type="password" class="form-control" id="senha" placeholder="Senha" name="senha" maxlength="255"
               value="<?= isset($_REQUEST['senha']) ? $_REQUEST['senha'] : null ?>">
-            <label for="password">Password</label>
+            <label for="senha">Password</label>
           </div>
           <!-- Botão login -->
           <a class="d-block text-center mt-1"><button class="btn btn-lg btn-success mt-3" type="submit" name="usuario" value="login">Login</button></a>
